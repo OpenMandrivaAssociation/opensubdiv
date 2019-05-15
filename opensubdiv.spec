@@ -41,7 +41,7 @@ BuildRequires:	pkgconfig(xrandr)
 #BuildRequires:	ptex >= 2.0
 # for doc building
 BuildRequires:	doxygen >= 1.8.4
-BuildRequires:	python2-docutils
+#BuildRequires:	python-docutils
 
 %description 
 OpenSubdiv is a set of open source libraries that implement high
