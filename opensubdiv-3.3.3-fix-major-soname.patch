@@ -1,0 +1,23 @@
+diff -up OpenSubdiv-3_3_3/opensubdiv/CMakeLists.txt.major OpenSubdiv-3_3_3/opensubdiv/CMakeLists.txt
+--- OpenSubdiv-3_3_3/opensubdiv/CMakeLists.txt.major	2018-07-18 04:17:49.000000000 +0200
++++ OpenSubdiv-3_3_3/opensubdiv/CMakeLists.txt	2019-04-23 16:47:24.130284531 +0200
+@@ -203,7 +203,8 @@ if (NOT NO_LIB)
+                 PROPERTIES
+                     OUTPUT_NAME osdCPU
+                     CLEAN_DIRECT_OUTPUT 1
+-                    SOVERSION ${OSD_SONAME}
++                    VERSION ${OSD_SONAME}
++                    SOVERSION 3
+                 )
+         else()
+             set_target_properties(osd_dynamic_cpu
+@@ -233,7 +234,8 @@ if (NOT NO_LIB)
+                     PROPERTIES
+                         OUTPUT_NAME osdGPU
+                         CLEAN_DIRECT_OUTPUT 1
+-                        SOVERSION ${OSD_SONAME}
++                        VERSION ${OSD_SONAME}
++                        SOVERSION 3
+                     )
+             else()
+                 set_target_properties(osd_dynamic_gpu
