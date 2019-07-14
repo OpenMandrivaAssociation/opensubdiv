@@ -3,23 +3,23 @@
 %define develname	%mklibname -d opensubdiv
 %define staticname	%mklibname -s -d opensubdiv
 
-%define	ver    3.3.3
-%define fver   3_3_3
+%define fver   3_4_0
 %define _disable_lto 1
 
 %define use_cuda 0
 %{?_with_use_cuda: %global use_cuda 1}
 %{?_without_use_cuda: %global use_cuda 0}
+%define underscore %(echo %{version} | sed -e "s/\\\./_/g")
 
 Name:		opensubdiv
-Version:	%{ver}
+Version:	3.4.0
 Release:	1
 Summary:	High performance subdivision surface libraries
 Group:		Graphics/3D
 License:	Apache License
 #Url:		http://graphics.pixar.com/opensubdiv/
 Url:		https://github.com/PixarAnimationStudios/OpenSubdiv
-Source0:	https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v%{fver}/%{name}-%{version}.tar.gz
+Source0:	https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v%{underscore}.tar.gz
 Patch0:		opensubdiv-3.3.3-fix-major-soname.patch
 BuildRequires:	cmake
 BuildRequires:	libgomp-devel
