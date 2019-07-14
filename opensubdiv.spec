@@ -13,7 +13,7 @@
 
 Name:		opensubdiv
 Version:	%{ver}
-Release:	%mkrel 6
+Release:	1
 Summary:	High performance subdivision surface libraries
 Group:		Graphics/3D
 License:	Apache License
