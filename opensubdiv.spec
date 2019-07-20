@@ -12,7 +12,7 @@
 %define underscore %(echo %{version} | sed -e "s/\\\./_/g")
 
 Name:		opensubdiv
-Version:	3_4_0
+Version:	3.4.0
 Release:	1
 Summary:	High performance subdivision surface libraries
 Group:		Graphics/3D
