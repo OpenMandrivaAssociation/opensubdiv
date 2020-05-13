@@ -117,8 +117,14 @@ Static libraries for OpenSubdiv.
 %patch0 -p1 -b .major
 
 %build
+# Fix for aarch64. With Clang 10: "/usr/include/tbb/tbb_machine.h:338:6: error: Unsupported machine word size.
+# #error Unsupported machine word size."
+# Quick solution - use GCC.
+
+%ifarch aarch64
 export CC=gcc
 export CXX=g++
+%endif
 
 export CFLAGS="%{optflags} -fopenmp"
 export CXXFLAGS="%{optflags} -fopenmp"
