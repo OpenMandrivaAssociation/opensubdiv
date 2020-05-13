@@ -39,6 +39,7 @@ BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xi)
 BuildRequires:	pkgconfig(xinerama)
 BuildRequires:	pkgconfig(xrandr)
+BuildRequires:  pkgconfig(xxf86vm)
 #BuildRequires:	ptex >= 2.0
 # for doc building
 BuildRequires:	doxygen >= 1.8.4
