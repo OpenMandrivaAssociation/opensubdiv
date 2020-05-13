@@ -117,6 +117,9 @@ Static libraries for OpenSubdiv.
 %patch0 -p1 -b .major
 
 %build
+export CC=gcc
+export CXX=g++
+
 export CFLAGS="%{optflags} -fopenmp"
 export CXXFLAGS="%{optflags} -fopenmp"
 
