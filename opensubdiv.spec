@@ -6,6 +6,7 @@
 %define oname	OpenSubdiv
 %define fver   3_4_3
 %define _disable_lto 1
+%define _disable_ld_no_undefined 1
 
 %define use_cuda 0
 %{?_with_use_cuda: %global use_cuda 1}
