@@ -3,8 +3,10 @@
 %define develname	%mklibname -d opensubdiv
 %define staticname	%mklibname -s -d opensubdiv
 
-%define fver   3_4_0
+%define oname	OpenSubdiv
+%define fver   3_4_3
 %define _disable_lto 1
+%define _disable_ld_no_undefined 1
 
 %define use_cuda 0
 %{?_with_use_cuda: %global use_cuda 1}
@@ -12,14 +14,14 @@
 %define underscore %(echo %{version} | sed -e "s/\\\./_/g")
 
 Name:		opensubdiv
-Version:	3_4_0
+Version:	3_4_3
 Release:	1
 Summary:	High performance subdivision surface libraries
 Group:		Graphics/3D
 License:	Apache License
 #Url:		http://graphics.pixar.com/opensubdiv/
 Url:		https://github.com/PixarAnimationStudios/OpenSubdiv
-Source0:	https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v%{underscore}.tar.gz
+Source0:	https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v%{underscore}/%{oname}-%{version}.tar.gz
 Patch0:		opensubdiv-3.3.3-fix-major-soname.patch
 BuildRequires:	cmake
 BuildRequires:	libgomp-devel
@@ -38,6 +40,7 @@ BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xi)
 BuildRequires:	pkgconfig(xinerama)
 BuildRequires:	pkgconfig(xrandr)
+BuildRequires:  pkgconfig(xxf86vm)
 #BuildRequires:	ptex >= 2.0
 # for doc building
 BuildRequires:	doxygen >= 1.8.4
@@ -158,47 +161,3 @@ rm -f %{buildroot}%{_bindir}/stringify
 
 %files -n %{staticname}
 %{_libdir}/*.a
-
-
-%changelog
-* Fri Apr 26 2019 ghibo <ghibo> 3.3.3-6.mga7
-+ Revision: 1395556
-- Add flags for building with cuda
-
-* Fri Apr 26 2019 ghibo <ghibo> 3.3.3-5.mga7
-+ Revision: 1395451
-- Add xinerama to BR
-- Add xcursor to BR
-- Add xrandr to BR
-- Rebuild against GLFW 3.3.
-
-* Wed Apr 24 2019 ghibo <ghibo> 3.3.3-4.mga7
-+ Revision: 1395119
-- Split doc package
-
-* Wed Apr 24 2019 ghibo <ghibo> 3.3.3-3.mga7
-+ Revision: 1395108
-- Add ICE to BR.
-- Add rst2html to BR for docs.
-
-* Tue Apr 23 2019 ghibo <ghibo> 3.3.3-2.mga7
-+ Revision: 1395047
-- Add missed libgomp-devel in BuildRequires
-- Fix typo in description.
-- Use PATH type for cmake arguments.
-
-* Tue Apr 23 2019 ghibo <ghibo> 3.3.3-1.mga7
-+ Revision: 1395008
-- fix soname adding Patch1 (credits to David Geiger)
-- fix libpath for 64bit (David Geiger)
-- removed CMAKE_BUILD_TYPE=Release (David Geiger)
-- removed %%clean section (David Geiger)
-- remove trailing dot in Summary (kekePower)
-- add docs
-- Added a fix for aarch64
-- Add xi to BuildRequires
-- imported package opensubdiv
-
-
-* Tue Apr 23 2019 ghibo <ghibo> 3.3.3-1.mga7
-- Initial release.
