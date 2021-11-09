@@ -148,7 +148,7 @@ export CXXFLAGS="%{optflags} -fopenmp"
 	-DNO_OPENCL:BOOL=OFF \
 	-DNO_PTEX:BOOL=ON \
 	-DNO_REGRESSION:BOOL=ON \
-	-DNO_TUTORIALS:BOOL:=ON || cat build/CMakeFiles/CMakeOutput.log && exit 1
+	-DNO_TUTORIALS:BOOL:=ON || cat CMakeFiles/CMakeOutput.log && exit 1
 
 %make_build
 cd ..
