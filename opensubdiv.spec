@@ -115,6 +115,7 @@ Static libraries for OpenSubdiv.
 
 %prep
 %autosetup -p1 -n OpenSubdiv-%{underscore}
+find . -name "*.py" |xargs 2to3 -w
 
 %build
 # Fix for aarch64. With Clang 10: "/usr/include/tbb/tbb_machine.h:338:6: error: Unsupported machine word size.
