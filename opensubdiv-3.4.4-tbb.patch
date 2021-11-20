@@ -1,0 +1,29 @@
+diff -up OpenSubdiv-3_4_4/opensubdiv/osd/tbbEvaluator.cpp.omv~ OpenSubdiv-3_4_4/opensubdiv/osd/tbbEvaluator.cpp
+--- OpenSubdiv-3_4_4/opensubdiv/osd/tbbEvaluator.cpp.omv~	2021-11-20 11:29:58.754316132 +0100
++++ OpenSubdiv-3_4_4/opensubdiv/osd/tbbEvaluator.cpp	2021-11-20 11:35:14.430111455 +0100
+@@ -25,7 +25,7 @@
+ #include "../osd/tbbEvaluator.h"
+ #include "../osd/tbbKernel.h"
+ 
+-#include <tbb/task_scheduler_init.h>
++//#include <tbb/task_scheduler_init.h>
+ 
+ namespace OpenSubdiv {
+ namespace OPENSUBDIV_VERSION {
+@@ -215,11 +215,16 @@ TbbEvaluator::Synchronize(void *) {
+ /* static */
+ void
+ TbbEvaluator::SetNumThreads(int numThreads) {
++    // There doesn't seem to be an equivalent of task_scheduler_init in current TBB.
++    // Code wishing to limit the number of threads has to run in a different
++    // oneapi::tbb::task_arena
++#if 0
+     if (numThreads == -1) {
+         tbb::task_scheduler_init init;
+     } else {
+         tbb::task_scheduler_init init(numThreads);
+     }
++#endif
+ }
+ 
+ }  // end namespace Osd

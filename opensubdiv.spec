@@ -4,7 +4,6 @@
 %define staticname	%mklibname -s -d opensubdiv
 
 %define oname	OpenSubdiv
-%define fver   3_4_3
 %define _disable_lto 1
 %define _disable_ld_no_undefined 1
 
@@ -14,7 +13,7 @@
 %define underscore %(echo %{version} | sed -e "s/\\\./_/g")
 
 Name:		opensubdiv
-Version:	3_4_3
+Version:	3.4.4
 Release:	1
 Summary:	High performance subdivision surface libraries
 Group:		Graphics/3D
@@ -23,7 +22,10 @@ License:	Apache License
 Url:		https://github.com/PixarAnimationStudios/OpenSubdiv
 Source0:	https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v%{underscore}/%{oname}-%{version}.tar.gz
 Patch0:		opensubdiv-3.3.3-fix-major-soname.patch
+Patch1:		OpenSubdiv-3.4.3-find-OpenCL.patch
+Patch2:		opensubdiv-3.4.4-tbb.patch
 BuildRequires:	cmake
+BuildRequires:	make
 BuildRequires:	libgomp-devel
 %if %{use_cuda}
 BuildRequires:	nvidia-cuda-toolkit >= 4.0
@@ -74,7 +76,6 @@ This package includes the documentation of OpenSubdiv.
 %package -n %{libname}
 Summary:	High performance subdivision surface libraries
 Group:		System/Libraries
-Requires:	%{_lib}tbb2 >= 4.0
 Requires:	%{_lib}glfw3 >= 3.0
 
 %description -n %{libname}
@@ -113,8 +114,7 @@ Static libraries for OpenSubdiv.
 
 
 %prep
-%setup -q -n OpenSubdiv-%{fver}
-%patch0 -p1 -b .major
+%autosetup -p1 -n OpenSubdiv-%{underscore}
 
 %build
 # Fix for aarch64. With Clang 10: "/usr/include/tbb/tbb_machine.h:338:6: error: Unsupported machine word size.
@@ -148,7 +148,12 @@ export CXXFLAGS="%{optflags} -fopenmp"
 	-DNO_OPENCL:BOOL=OFF \
 	-DNO_PTEX:BOOL=ON \
 	-DNO_REGRESSION:BOOL=ON \
-	-DNO_TUTORIALS:BOOL:=ON || cat CMakeFiles/CMakeOutput.log && exit 1
+	-DNO_TUTORIALS:BOOL:=ON
+
+if [ "$?" != "0" ]; then
+	cat CMakeFiles/CMakeOutput.log
+	exit 1
+fi
 
 %make_build
 cd ..
