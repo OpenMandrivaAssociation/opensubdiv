@@ -46,7 +46,9 @@ BuildRequires:  pkgconfig(xxf86vm)
 #BuildRequires:	ptex >= 2.0
 # for doc building
 BuildRequires:	doxygen >= 1.8.4
-BuildRequires:	python3dist(docutils)
+# FIXME documentation/*.py needs to be ported to 3.x
+BuildRequires:	python2
+BuildRequires:	python2dist(docutils)
 
 %description 
 OpenSubdiv is a set of open source libraries that implement high
@@ -115,7 +117,6 @@ Static libraries for OpenSubdiv.
 
 %prep
 %autosetup -p1 -n OpenSubdiv-%{underscore}
-find . -name "*.py" |xargs 2to3 -w
 
 %build
 # Fix for aarch64. With Clang 10: "/usr/include/tbb/tbb_machine.h:338:6: error: Unsupported machine word size.
