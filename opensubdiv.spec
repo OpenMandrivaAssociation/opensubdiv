@@ -1,5 +1,6 @@
 %define major		3
-%define libname		%mklibname opensubdiv %{major}
+%define libname		%mklibname opensubdiv
+%define oldlibname	%mklibname opensubdiv 3
 %define develname	%mklibname -d opensubdiv
 %define staticname	%mklibname -s -d opensubdiv
 
@@ -13,7 +14,7 @@
 %define underscore %(echo %{version} | sed -e "s/\\\./_/g")
 
 Name:		opensubdiv
-Version:	3.4.4
+Version:	3.5.0
 Release:	1
 Summary:	High performance subdivision surface libraries
 Group:		Graphics/3D
@@ -46,9 +47,8 @@ BuildRequires:  pkgconfig(xxf86vm)
 #BuildRequires:	ptex >= 2.0
 # for doc building
 BuildRequires:	doxygen >= 1.8.4
-# FIXME documentation/*.py needs to be ported to 3.x
-BuildRequires:	python2
-BuildRequires:	python2dist(docutils)
+BuildRequires:	python
+BuildRequires:	python%{pyver}dist(docutils)
 
 %description 
 OpenSubdiv is a set of open source libraries that implement high
@@ -79,6 +79,7 @@ This package includes the documentation of OpenSubdiv.
 Summary:	High performance subdivision surface libraries
 Group:		System/Libraries
 Requires:	%{_lib}glfw3 >= 3.0
+%rename %oldlibname
 
 %description -n %{libname}
 OpenSubdiv is a set of open source libraries that implement high
@@ -124,8 +125,8 @@ Static libraries for OpenSubdiv.
 # Quick solution - use GCC.
 
 %ifarch aarch64
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 %endif
 
 export CFLAGS="%{optflags} -fopenmp"
@@ -174,6 +175,7 @@ rm -f %{buildroot}%{_bindir}/stringify
 %files -n %{develname}
 %{_libdir}/lib*.so
 %{_includedir}/*
+%{_libdir}/cmake/OpenSubdiv
 
 %files -n %{staticname}
 %{_libdir}/*.a
