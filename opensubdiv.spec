@@ -32,6 +32,8 @@ BuildRequires:	libgomp-devel
 BuildRequires:	nvidia-cuda-toolkit >= 4.0
 BuildRequires:	nvidia-cuda-toolkit-devel >= 4.0
 %endif
+BuildRequires:	pkgconfig(opengl)
+BuildRequires:	pkgconfig(dri)
 BuildRequires:	pkgconfig(OpenCL) >= 1.1
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glfw3) >= 3.0.0
