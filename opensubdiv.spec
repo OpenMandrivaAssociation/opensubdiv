@@ -15,7 +15,7 @@
 
 Name:		opensubdiv
 Version:	3.5.0
-Release:	1
+Release:	2
 Summary:	High performance subdivision surface libraries
 Group:		Graphics/3D
 License:	Apache License
