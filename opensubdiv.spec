@@ -14,17 +14,17 @@
 %define underscore %(echo %{version} | sed -e "s/\\\./_/g")
 
 Name:		opensubdiv
-Version:	3.5.0
-Release:	2
+Version:	3.7.0
+Release:	1
 Summary:	High performance subdivision surface libraries
 Group:		Graphics/3D
 License:	Apache License
 #Url:		http://graphics.pixar.com/opensubdiv/
 Url:		https://github.com/PixarAnimationStudios/OpenSubdiv
 Source0:	https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v%{underscore}/%{oname}-%{version}.tar.gz
-Patch0:		opensubdiv-3.3.3-fix-major-soname.patch
-Patch1:		OpenSubdiv-3.4.3-find-OpenCL.patch
-Patch2:		opensubdiv-3.4.4-tbb.patch
+# dropped (no longer applies): Patch0:		opensubdiv-3.3.3-fix-major-soname.patch
+# dropped (no longer applies): Patch1:		OpenSubdiv-3.4.3-find-OpenCL.patch
+# dropped (no longer applies): Patch2:		opensubdiv-3.4.4-tbb.patch
 BuildRequires:	cmake
 BuildRequires:	make
 BuildRequires:	libgomp-devel
@@ -119,7 +119,7 @@ Static libraries for OpenSubdiv.
 
 
 %prep
-%autosetup -p1 -n OpenSubdiv-%{underscore}
+%autosetup -p1 -n OpenSubdiv-3_7_0
 
 %build
 # Fix for aarch64. With Clang 10: "/usr/include/tbb/tbb_machine.h:338:6: error: Unsupported machine word size.
